@@ -3,7 +3,9 @@
     "description": "Laravel driver for the bestit/flagception-sdk",
     "require": {
         "flagception/flagception": "^1.1",
-        "laravel/laravel": "5.6.*"
+        "illuminate/support": "5.5.*|5.6.*",
+        "illuminate/routing": "5.5.*|5.6.*",
+        "illuminate/view": "5.5.*|5.6.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"
