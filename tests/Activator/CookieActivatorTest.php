@@ -6,11 +6,12 @@ use BestIt\LaravelFlagception\Activator\CookieActivator;
 use Flagception\Model\Context;
 use Illuminate\Contracts\Config\Repository as Config;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class CookieActivatorTest
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests\Activator
  */
 class CookieActivatorTest extends TestCase
@@ -25,7 +26,7 @@ class CookieActivatorTest extends TestCase
     /**
      * The config facade.
      *
-     * @var Config $config
+     * @var Config|PHPUnit_Framework_MockObject_MockObject $config
      */
     private $config;
 
@@ -40,7 +41,7 @@ class CookieActivatorTest extends TestCase
     }
 
     /**
-     * Test the get name method
+     * Test the get name method.
      *
      * @return void
      */
@@ -50,7 +51,7 @@ class CookieActivatorTest extends TestCase
     }
 
     /**
-     * Test for the isActive method
+     * Test for the isActive method.
      *
      * @param string $feature
      * @param string $cookieString
@@ -93,7 +94,7 @@ class CookieActivatorTest extends TestCase
     }
 
     /**
-     * Possible CookieActivator settings
+     * Possible CookieActivator settings.
      *
      * @return array
      */

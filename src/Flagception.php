@@ -2,6 +2,7 @@
 
 namespace BestIt\LaravelFlagception;
 
+use Flagception\Manager\FeatureManager;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Facade;
  *
  * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception
+ *
+ * @method static bool isActive($feature) Check if an feature is active.
  */
 class Flagception extends Facade
 {
@@ -19,6 +22,6 @@ class Flagception extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Flagception';
+        return FeatureManager::class;
     }
 }

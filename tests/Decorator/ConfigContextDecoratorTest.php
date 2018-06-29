@@ -7,27 +7,32 @@ use Flagception\Exception\AlreadyDefinedException;
 use Flagception\Model\Context;
 use Illuminate\Contracts\Config\Repository as Config;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class ConfigContextDecoratorClass
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests\Decorator
  */
 class ConfigContextDecoratorClass extends TestCase
 {
     /**
+     * The config context decorator.
+     *
      * @var ConfigContextDecorator $fixture
      */
     private $fixture;
 
     /**
-     * @var Config $config
+     * The config facade.
+     *
+     * @var Config|PHPUnit_Framework_MockObject_MockObject $config
      */
     private $config;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -37,7 +42,9 @@ class ConfigContextDecoratorClass extends TestCase
     }
 
     /**
-     * Test the get name method
+     * Test the get name method.
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -45,7 +52,9 @@ class ConfigContextDecoratorClass extends TestCase
     }
 
     /**
-     * Test the decorate method
+     * Test the decorate method.
+     *
+     * @return void
      *
      * @throws AlreadyDefinedException
      */

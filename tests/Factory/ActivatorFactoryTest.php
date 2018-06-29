@@ -9,32 +9,39 @@ use Flagception\Model\Context;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application as App;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class ActivatorFactoryTest
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests\Factory
  */
 class ActivatorFactoryTest extends TestCase
 {
     /**
-     * @var ActivatorCompositeFactory
+     * The activator composite factory.
+     *
+     * @var ActivatorCompositeFactory $fixture
      */
     private $fixture;
 
     /**
-     * @var Config $config
+     * The config facade.
+     *
+     * @var Config|PHPUnit_Framework_MockObject_MockObject $config
      */
     private $config;
 
     /**
-     * @var App $app
+     * The application container.
+     *
+     * @var App|PHPUnit_Framework_MockObject_MockObject $app
      */
     private $app;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -45,7 +52,7 @@ class ActivatorFactoryTest extends TestCase
     }
 
     /**
-     * test the create method
+     * Test the create method.
      *
      * @return void
      */

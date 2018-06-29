@@ -6,32 +6,39 @@ use BestIt\LaravelFlagception\Directive\FlagceptionDirectiveProvider;
 use Flagception\Manager\FeatureManager;
 use Illuminate\View\Compilers\BladeCompiler;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class FlagceptionDirectiveProviderTest
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests\Directive
  */
 class FlagceptionDirectiveProviderTest extends TestCase
 {
     /**
+     * The Flagception directive provider.
+     *
      * @var FlagceptionDirectiveProvider $fixture
      */
     private $fixture;
 
     /**
-     * @var FeatureManager $featureManager;
+     * The feature manager.
+     *
+     * @var FeatureManager|PHPUnit_Framework_MockObject_MockObject $featureManager
      */
     private $featureManager;
 
     /**
-     * @var BladeCompiler $bladeCompiler
+     * The blade compiler.
+     *
+     * @var BladeCompiler|PHPUnit_Framework_MockObject_MockObject $bladeCompiler
      */
     private $bladeCompiler;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -44,6 +51,8 @@ class FlagceptionDirectiveProviderTest extends TestCase
     /**
      * Test register directive
      * TODO: test the closure
+     *
+     * @return void
      */
     public function testRegisterDirective()
     {
