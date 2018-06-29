@@ -44,7 +44,6 @@ return [
 ```
 
 Inject the FeatureManager where you need it:
-
 ``` php
 class WelcomeController extends Controller
 {
