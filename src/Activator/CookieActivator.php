@@ -59,9 +59,12 @@ class CookieActivator implements FeatureActivatorInterface
      */
     public function isActive($name, Context $context)
     {
-        $configEnabled = $this->config->get('flagception.features.' . $name . '.cookie') ?? true;
-        $cookieName = $this->config->get('flagception.cookie.name') ?? self::DEFAULT_COOKIE_NAME;
-        $delimiter = $this->config->get('flagception.cookie.delimiter') ?? self::DEFAULT_COOKIE_DELIMITER;
+        $configEnabled = $this->config->has('flagception.features.' . $name . '.cookie') ?
+            $this->config->get('flagception.features.' . $name . '.cookie') : true;
+        $cookieName = $this->config->has('flagception.cookie.name') ?
+            $this->config->get('flagception.cookie.name') : self::DEFAULT_COOKIE_NAME;
+        $delimiter = $this->config->has('flagception.cookie.delimiter') ?
+            $this->config->get('flagception.cookie.delimiter') : self::DEFAULT_COOKIE_DELIMITER;
 
         return $configEnabled
             && isset($_COOKIE[$cookieName])

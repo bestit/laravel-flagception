@@ -16,17 +16,21 @@ use PHPUnit\Framework\TestCase;
 class CookieActivatorTest extends TestCase
 {
     /**
+     * The cookie activator.
+     *
      * @var CookieActivator $fixture
      */
     private $fixture;
 
     /**
+     * The config facade.
+     *
      * @var Config $config
      */
     private $config;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -37,6 +41,8 @@ class CookieActivatorTest extends TestCase
 
     /**
      * Test the get name method
+     *
+     * @return void
      */
     public function testGetName()
     {
@@ -46,14 +52,27 @@ class CookieActivatorTest extends TestCase
     /**
      * Test for the isActive method
      *
+     * @param string $feature
+     * @param string $cookieString
+     * @param string $cookieEnabled
+     * @param string $expectedResult
+     *
      * @dataProvider getActivatorSettings
+     *
+     * @return void
      */
-    public function testIsActive(
-        string $feature,
-        string $cookieString,
-        bool $cookieEnabled,
-        bool $expectedResult
-    ) {
+    public function testIsActive($feature, $cookieString, $cookieEnabled, $expectedResult)
+    {
+        $this->config
+            ->expects(static::exactly(3))
+            ->method('has')
+            ->withConsecutive(
+                ['flagception.features.' . $feature . '.cookie'],
+                ['flagception.cookie.name'],
+                ['flagception.cookie.delimiter']
+            )
+            ->willReturn(true);
+
         $this->config
             ->expects(static::exactly(3))
             ->method('get')
@@ -78,7 +97,7 @@ class CookieActivatorTest extends TestCase
      *
      * @return array
      */
-    public function getActivatorSettings(): array
+    public function getActivatorSettings()
     {
         return [
             ['feature', 'feature', true, true],
