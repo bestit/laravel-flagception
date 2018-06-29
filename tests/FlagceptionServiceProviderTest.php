@@ -8,27 +8,32 @@ use BestIt\LaravelFlagception\Middleware\FlagceptionMiddleware;
 use Illuminate\Contracts\Foundation\Application as App;
 use Illuminate\Routing\Router;
 use PHPUnit\Framework\TestCase;
+use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * Class FlagceptionServiceProviderTest
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests
  */
 class FlagceptionServiceProviderTest extends TestCase
 {
     /**
+     * The flagception service provider.
+     *
      * @var FlagceptionServiceProvider $fixture
      */
     private $fixture;
 
     /**
-     * @var App $app
+     * The application container.
+     *
+     * @var App|PHPUnit_Framework_MockObject_MockObject $app
      */
     private $app;
 
     /**
-     * @throws \ReflectionException
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -38,9 +43,8 @@ class FlagceptionServiceProviderTest extends TestCase
     }
 
     /**
-     * Test the boot method
+     * Test the boot method.
      *
-     * @throws \ReflectionException
      * @return void
      */
     public function testBoot()

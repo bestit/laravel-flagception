@@ -9,13 +9,15 @@ use PHPUnit\Framework\TestCase;
 /**
  * Class FlagceptionTest
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Tests
  */
 class FlagceptionTest extends TestCase
 {
     /**
-     * Test that the facade is extended
+     * Test that the facade is extended.
+     *
+     * @return void
      */
     public function testIsFacade()
     {
