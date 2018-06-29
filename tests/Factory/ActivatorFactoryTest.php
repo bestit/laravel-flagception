@@ -3,7 +3,7 @@
 namespace BestIt\LaravelFlagception\Tests\Factory;
 
 use BestIt\LaravelFlagception\Activator\CookieActivator;
-use BestIt\LaravelFlagception\Factory\ActivatorFactory;
+use BestIt\LaravelFlagception\Factory\ActivatorCompositeFactory;
 use Flagception\Constraint\Provider\DateProvider;
 use Flagception\Model\Context;
 use Illuminate\Contracts\Config\Repository as Config;
@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 class ActivatorFactoryTest extends TestCase
 {
     /**
-     * @var ActivatorFactory
+     * @var ActivatorCompositeFactory
      */
     private $fixture;
 
@@ -38,7 +38,7 @@ class ActivatorFactoryTest extends TestCase
      */
     public function setUp()
     {
-        $this->fixture = new ActivatorFactory(
+        $this->fixture = new ActivatorCompositeFactory(
             $this->config = $this->createMock(Config::class),
             $this->app = $this->createMock(App::class)
         );

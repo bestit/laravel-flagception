@@ -3,56 +3,66 @@
 namespace BestIt\LaravelFlagception;
 
 use BestIt\LaravelFlagception\Directive\FlagceptionDirectiveProvider;
-use BestIt\LaravelFlagception\Factory\ActivatorFactory;
-use BestIt\LaravelFlagception\Factory\DecoratorFactory;
+use BestIt\LaravelFlagception\Factory\ActivatorCompositeFactory;
+use BestIt\LaravelFlagception\Factory\DecoratorCompositeFactory;
+use BestIt\LaravelFlagception\Middleware\FlagceptionMiddleware;
 use Flagception\Manager\FeatureManager;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
-use BestIt\LaravelFlagception\Middleware\FlagceptionMiddleware;
+use Illuminate\Contracts\Foundation\Application as App;
 
 /**
- * Class FlagceptionServiceProvider
+ * Laravel service provider for flagception
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception
  */
-class FlagceptionServiceProvider extends ServiceProvider {
-
+class FlagceptionServiceProvider extends ServiceProvider
+{
     /**
      * Boot the service. Register directive and middleware
      *
      * @param Router $router
+     *
+     * @return void
      */
-    public function boot(Router $router) {
+    public function boot(Router $router)
+    {
         $router->aliasMiddleware('feature', FlagceptionMiddleware::class);
         $this->app->make(FlagceptionDirectiveProvider::class)->registerDirective();
 
-        $this->publishes([
-            __DIR__.'/../config/flagception.php' => $this->app->make('path.config') . '/flagception.php',
-        ], 'flagception');
+        $this->publishes(
+            [
+                __DIR__.'/../config/flagception.php' => $this->app->make('path.config') . '/flagception.php'
+            ],
+            'flagception'
+        );
     }
 
     /**
-     * Register the service
+     * Register the service.
+     *
+     * @return void
      */
-    public function register() {
-        $this->mergeConfigFrom( __DIR__.'/../config/flagception.php', 'flagception');
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../config/flagception.php', 'flagception');
 
-        $this->app->singleton(FeatureManager::class, function(Application $app) {
+        $this->app->singleton(FeatureManager::class, function (App $app) {
             return new FeatureManager(
-                $app->make(ActivatorFactory::class)->create(),
-                $app->make(DecoratorFactory::class)->create()
+                $app->make(ActivatorCompositeFactory::class)->create(),
+                $app->make(DecoratorCompositeFactory::class)->create()
             );
         });
     }
 
     /**
-     * Provide alias
+     * Provide alias.
      *
      * @return array
      */
-    public function provides() {
+    public function provides()
+    {
         return ['Flagception'];
     }
 }

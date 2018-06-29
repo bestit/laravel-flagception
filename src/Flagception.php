@@ -5,9 +5,9 @@ namespace BestIt\LaravelFlagception;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Flagception
+ * The flagception facade.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception
  */
 class Flagception extends Facade
@@ -17,7 +17,8 @@ class Flagception extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() {
+    protected static function getFacadeAccessor()
+    {
         return 'Flagception';
     }
 }

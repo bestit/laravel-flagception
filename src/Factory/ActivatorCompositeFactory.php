@@ -11,25 +11,29 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application as App;
 
 /**
- * Class ActivatorFactory
+ * Factory for the composite of all activators.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Factory
  */
-class ActivatorFactory
+class ActivatorCompositeFactory
 {
     /**
+     * The laravel config facade.
+     *
      * @var Config $config
      */
     private $config;
 
     /**
+     * The laravel application container.
+     *
      * @var App $app
      */
     private $app;
 
     /**
-     * ActivatorFactory constructor.
+     * ActivatorCompositeFactory constructor.
      *
      * @param Config $config
      * @param App $app
@@ -41,11 +45,11 @@ class ActivatorFactory
     }
 
     /**
-     * Gather all features in activators activator
+     * Gather all features in activators activator.
      *
      * @return ChainActivator
      */
-    public function create(): ChainActivator
+    public function create()
     {
         $chainActivator = new ChainActivator();
         $chainActivator->add($this->getArrayActivator());
@@ -59,13 +63,14 @@ class ActivatorFactory
     }
 
     /**
-     * Builds the array activator from the config
+     * Builds the array activator from the config.
      *
      * @return ArrayActivator
      */
-    private function getArrayActivator(): ArrayActivator
+    private function getArrayActivator()
     {
         $activeFeatures = [];
+
         foreach ($this->config->get('flagception.features') as $name => $settings) {
             if (isset($settings['active']) && $settings['active']) {
                 $activeFeatures[] = $name;
@@ -76,13 +81,14 @@ class ActivatorFactory
     }
 
     /**
-     * Create the ConstraintActivator from the config
+     * Create the ConstraintActivator from the config.
      *
      * @return ConstraintActivator
      */
-    private function getConstraintActivator(): ConstraintActivator
+    private function getConstraintActivator()
     {
         $constraints = [];
+
         foreach ($this->config->get('flagception.features') as $name => $settings) {
             if (isset($settings['constraint']) && $settings['constraint']) {
                 $constraints[$name] = $settings['constraint'];
@@ -90,6 +96,7 @@ class ActivatorFactory
         }
 
         $factory = new ExpressionLanguageFactory();
+
         foreach ($this->config->get('flagception.expressions') as $provider) {
             $factory->addProvider($this->app->make($provider));
         }

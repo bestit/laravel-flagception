@@ -6,7 +6,7 @@ use BestIt\LaravelFlagception\Decorator\ConfigContextDecorator;
 use Flagception\Decorator\ChainDecorator;
 use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application as App;
-use BestIt\LaravelFlagception\Factory\DecoratorFactory;
+use BestIt\LaravelFlagception\Factory\DecoratorCompositeFactory;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 class DecoratorFactoryTest extends TestCase
 {
     /**
-     * @var DecoratorFactory
+     * @var DecoratorCompositeFactory
      */
     private $fixture;
 
@@ -37,7 +37,7 @@ class DecoratorFactoryTest extends TestCase
      */
     public function setUp()
     {
-        $this->fixture = new DecoratorFactory(
+        $this->fixture = new DecoratorCompositeFactory(
             $this->config = $this->createMock(Config::class),
             $this->app = $this->createMock(App::class)
         );

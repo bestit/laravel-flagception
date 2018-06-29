@@ -1,22 +1,34 @@
 {
     "name": "bestit/laravel-flagception",
     "description": "Laravel driver for the bestit/flagception-sdk",
-    "require": {
-        "flagception/flagception": "^1.1",
-        "illuminate/support": "5.5.*|5.6.*",
-        "illuminate/routing": "5.5.*|5.6.*",
-        "illuminate/view": "5.5.*|5.6.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^7"
-    },
-    "license": "MIT",
+    "homepage": "https://github.com/bestit/laravel-flagception",
     "authors": [
         {
             "name": "andre.varelmann",
             "email": "andre.varelmann@bestit-online.de"
         }
     ],
+    "keywords":
+    [
+        "bestit",
+        "laravel",
+        "flagception",
+        "feature toggle",
+        "feature flags"
+    ],
+    "require": {
+        "php" : "^5.6||^7.0",
+        "flagception/flagception": "^1.1",
+        "illuminate/support": "5.5.*|5.6.*",
+        "illuminate/routing": "5.5.*|5.6.*",
+        "illuminate/view": "5.5.*|5.6.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "^2.8",
+        "phing/phing": "^2.15"
+    },
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "BestIt\\LaravelFlagception\\": "src/"

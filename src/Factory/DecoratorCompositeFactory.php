@@ -7,19 +7,23 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Contracts\Foundation\Application as App;
 
 /**
- * Class DecoratorFactory
+ * Factory for the decorator composite.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Factory
  */
-class DecoratorFactory
+class DecoratorCompositeFactory
 {
     /**
+     * The laravel config facade.
+     *
      * @var Config $config
      */
     private $config;
 
     /**
+     * The laravel application container.
+     *
      * @var App $app
      */
     private $app;
@@ -37,11 +41,11 @@ class DecoratorFactory
     }
 
     /**
-     * Creates the chain decorator
+     * Creates the chain decorator.
      *
      * @return ChainDecorator
      */
-    public function create(): ChainDecorator
+    public function create()
     {
         $chainDecorator = new ChainDecorator();
 

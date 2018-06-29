@@ -11,19 +11,23 @@ use Illuminate\Contracts\Config\Repository as Config;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Class FlagceptionMiddleware
+ * Middleware to guard routes with feature flags.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Middleware
  */
 class FlagceptionMiddleware
 {
     /**
+     * The feature manager.
+     *
      * @var FeatureManager $flagceptionService
      */
     private $featureManager;
 
     /**
+     * The laravel config facade.
+     *
      * @var Config $config
      */
     private $config;
@@ -42,17 +46,20 @@ class FlagceptionMiddleware
 
     /**
      * Handle an incoming request.
-     * Pass context with the syntax key=value
+     * Pass the feature and context.
+     * Pass context with the syntax key=value.
      *
      * @param  Request  $request
      * @param  Closure  $next
      * @param  string  $feature
      * @param  string[] $contextStrings
-     * @return mixed
+     *
      * @throws NotFoundHttpException
      * @throws AlreadyDefinedException
+     *
+     * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $feature, string ...$contextStrings)
+    public function handle(Request $request, Closure $next, $feature, ...$contextStrings)
     {
         $context = new Context();
         foreach ($contextStrings as $contextString) {
@@ -63,7 +70,8 @@ class FlagceptionMiddleware
             $context->add($key, $value);
         }
 
-        $configEnabled = $this->config->get('flagception.middleware.enabled') ?? true;
+        $configEnabled = $this->config->get('flagception.middleware.enabled') ? true : false;
+
         if (!$configEnabled || !$this->featureManager->isActive($feature, $context)) {
             throw new NotFoundHttpException();
         }

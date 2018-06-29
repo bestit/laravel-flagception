@@ -8,34 +8,37 @@ use Flagception\Model\Context;
 use Flagception;
 
 /**
- * Class CookieActivator
+ * Cookie activator based on super global $_COOKIE.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Activator
  */
 class CookieActivator implements FeatureActivatorInterface
 {
     /**
-     * default cookie name
+     * Default cookie name.
      *
      * @var string DEFAULT_COOKIE_NAME
      */
     const DEFAULT_COOKIE_NAME = 'flagception';
 
     /**
-     * default cookie delimiter
+     * Default cookie delimiter.
      *
      * @var string DEFAULT_COOKIE_DELIMITER
      */
     const DEFAULT_COOKIE_DELIMITER = ',';
 
     /**
+     * The laravel config facade.
+     *
      * @var Config $config
      */
     private $config;
 
     /**
      * CookieActivator constructor.
+     *
      * @param Config $config
      */
     public function __construct(Config $config)
@@ -64,6 +67,4 @@ class CookieActivator implements FeatureActivatorInterface
             && isset($_COOKIE[$cookieName])
             && in_array($name, explode($delimiter, $_COOKIE[$cookieName]));
     }
-
-
 }

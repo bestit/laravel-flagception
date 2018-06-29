@@ -8,19 +8,23 @@ use Illuminate\View\Compilers\BladeCompiler;
 use Flagception\Manager\FeatureManager;
 
 /**
- * Class FlagceptionDirectiveProvider
+ * Provides a blade directive to check feature flags.
  *
- * @author andre.varelmann <andre.varelmann@bestit-online.de>
+ * @author André Varelmann <andre.varelmann@bestit-online.de>
  * @package BestIt\LaravelFlagception\Directive
  */
 class FlagceptionDirectiveProvider
 {
     /**
+     * The feature manager.
+     *
      * @var FeatureManager $featureManager
      */
     private $featureManager;
 
     /**
+     * The blade compiler.
+     *
      * @var BladeCompiler $bladeCompiler;
      */
     private $bladeCompiler;
@@ -38,12 +42,15 @@ class FlagceptionDirectiveProvider
     }
 
     /**
-     * Register blade directive
+     * Register the blade if-directive.
+     *
+     * @return void
      */
-    public function registerDirective() {
+    public function registerDirective()
+    {
         $this->bladeCompiler->if('feature', function ($feature, $contextArray = []) {
-
             $context = new Context();
+
             foreach ($contextArray as $key => $value) {
                 $context->add($key, $value);
             }
